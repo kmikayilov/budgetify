@@ -1,25 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import React, { useEffect, useCallback } from 'react';
+
+// import SignIn from './components/SignIn/SignIn';
+// import SignUp from './components/SignUp/SignUp';
+import Home from './components/Home/Home';
+
+// import { fetchLoggedUser, logout } from './helpers/state/authSlice';
+// import { loaded } from './helpers/state/commonSlice';
+
+// import api from './helpers/api';
+
+import './App.scss';
 
 function App() {
+  // const dispatch = useDispatch();
+
+	useEffect(() => {
+		const token = window.localStorage.getItem('app-jwt-token');
+		
+		if (!!token) {
+			// api.setToken(token);
+			// dispatch(fetchLoggedUser());
+		}
+		
+		// api.setLogoutFn(() => dispatch(logout()));
+		// dispatch(loaded());
+	
+	}, []);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+			<div className="App">
+				<Routes>
+					{/* <Route path="/sign-up" Component={SignUp} /> */}
+					{/* <Route path="/sign-in" Component={SignIn} /> */}
+					<Route path="/" Component={Home} />
+				</Routes>
+			</div>
+		</Router>
   );
 }
 
