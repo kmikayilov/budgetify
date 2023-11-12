@@ -1,43 +1,72 @@
-// import { IconButton, Button, Menu, MenuItem, Box } from '@mui/material';
-// import { LinkContainer } from 'react-router-bootstrap';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
 import HeaderLogo from '../../assets/static/icons/budgetify.svg';
 
 // import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 // import AccountCircle from '@mui/icons-material/AccountCircle';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faReceipt, faHouse, faCircleUser } from '@fortawesome/free-solid-svg-icons';
+
 import './Header.scss';
 
-interface HeaderProps {
-	toggle?: Function | null;
-}
-
-const Header: React.FC<HeaderProps> = ({ toggle }) => {
-	// const navigate = useNavigate();
-
-	// const [anchorEl, setAnchorEl] = useState(null);
-
-	// const isMenuOpen = Boolean(anchorEl);
-
-	// const handleProfileMenuOpen = (event) => setAnchorEl(event.currentTarget);
-	// const handleMenuClose = () => setAnchorEl(null);
-
-	// const loginBtnHandler = () => navigate('/sign-in');
+const Header: React.FC= () => {
+	const navigate = useNavigate();
 
 	// const logoutHandler = useCallback(() => {
 	// 	dispatch(logout());
 	// 	window.location.pathname = '/';
 	// }, [dispatch]);
 
-	// const user = useSelector((store) => store.auth.loggedUser, shallowEqual
+	// const user = useSelector((store: any) => store.auth.loggedUser, shallowEqual)
+
+	const user: boolean = true
 
 	return (
-		<header>
+		<header className="header">
 			<div className="header__logo">
 				<img src={HeaderLogo} alt="header-logo" className="header__logo__img" />
+			</div>
+			<div className="header__navbar">
+				{
+					!!user && (
+						<>
+							<div className="header__navbar__item custom-btn" onClick={ () => navigate('/') }>
+								<div className="header__navbar__item__icon icon"><FontAwesomeIcon icon={faHouse} /></div>
+								<div className="header__navbar__item__title title">Dashboard</div>
+							</div>
+							<div className="header__navbar__item custom-btn" onClick={ () => navigate('/transactions') }>
+								<div className="header__navbar__item__icon icon"><FontAwesomeIcon icon={faReceipt} /></div>
+								<div className="header__navbar__item__title title">Transactions</div>
+							</div>
+						</>
+					)
+				}
+			</div>
+			
+			<div className="header__account">
+				{
+					!user && (
+						<button className="custom-btn" onClick={ () => navigate('/sign-in') }>
+							<div className='title'>Sign In</div>
+						</button>
+					)
+				}
+				{   
+					!!user && (
+						<>
+							<div className="header__account__info">
+								<div className="icon"><FontAwesomeIcon icon={faCircleUser} /></div>
+								<div className="username">kananmika</div>
+							</div>
+							<button className="custom-btn" onClick={ () => console.log('logout') }>
+								<div className='title'>Logout</div>
+							</button>
+						</>
+					)
+				}
 			</div>
 			{/* {
 				toggle && (

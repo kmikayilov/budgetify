@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 import './Home.scss';
 
 const Home: React.FC = () => {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     return (
         <div className="Home" data-testid="Home">
-			<Header toggle={() => setIsOpen(!isOpen)} />
+			<Header />
+			<div className="content">
+
+			</div>
+			<Footer />
 			{/* <Grid container className="main"> */}
 				{/* <SideNavBar isOpen={isOpen} toggle={() => setIsOpen(!isOpen)} /> */}
 				{/* <Routes> */}

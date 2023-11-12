@@ -1,73 +1,89 @@
 @import '../../assets/styles/scss/_colors.scss';
+@import '../../assets/styles/scss/_components.scss';
 
-header {
-	background-color: $color-dark !important;
-	height: 64px;
-	color: #7b8794 !important;
-	border-color: $grey-text-bg !important;
-	box-shadow: 0 1rem 4rem rgba($component-bg, 0.08);
-	display: flex;
-	flex-direction: row !important;
-	align-items: center;
-	width: 100%;
-	padding: 0 16px;
-	position: fixed;
-	top: 0;
-	left: 0;
+.header {
+    height: 64px;
 
-	.menuBtn {
-		margin-right: 10px;
-	}
-	.title {
-		cursor: pointer;
+    padding: 0 72px;
+    
+    display: flex;
+    align-items: center;
+    
+    background-color: $color-dark;
 
-		&:hover {
-			color: $violet-active-text-bg;
+    &__logo {
+        width: 196px;
+        height: 32px;
+
+        @media (max-width: 360px) {
+            width: 147px;
+            height: 24px;   
+        }
+
+        &__img {
+            width: 100%;
+            height: 100%;
+			
+        }
+    }
+
+	&__navbar {
+		color: $color-slate-100;
+		height: 32px;
+
+		margin-left: 50px;
+
+		display: flex;
+		align-items: center;
+
+		flex-grow: 1;
+
+		&__item {
+			margin-right: 20px;
+
 		}
 	}
-	.actionBtn {
-		margin-left: auto;
-		width: 45px;
-		height: 45px;
+	&__account {
+		display: flex;
+		align-items: center;
+		
+		&__info {
+			display: flex;
+    		align-items: center;	
+			padding: 8px 20px;
+			color: $color-slate-200;
 
-		button {
-			width: 100%;
-			height: 100%;
-		}
+			font-family: "Inter" sans-serif;
+			font-size: 14px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 16px;
+			
+			.icon {
+				margin-right: 5px;
+				height: 18px;
+				width: 18px;
 
-		.MuiIconButton-label {
-			position: relative;
-
-			.account-popup {
-				position: absolute;
-				top: 100%;
-				right: 0;
-				font-size: 16px;
-				color: $grey-text-bg;
-				background-color: $app-bg;
-				padding: 5px 10px;
-				border-radius: 10px;
-				opacity: 0;
-				transition: all 0.5s;
-				margin-top: 10px;
-			}
-
-			&:hover {
-				.account-popup {
-					opacity: 1;
+				svg {
+					width: 100%;
+					height: 100%;
 				}
 			}
+
+			.username {
+				font-size: 18px;
+				line-height: 18px;
+			}
 		}
-	}
-	.logoIcon {
-		margin-right: 10px;
+
 	}
 
-	@media (max-width: 350px) {
-		padding: 0 5px;
+    @media (max-width: 768px) {
+        padding-left: 20px;
+    }
 
-		.menuBtn {
-			margin-right: 10px;
-		}
-	}
+    @media (max-width: 360px) {
+        height: 56px;
+        padding-left: 16px;
+    }
 }

@@ -1,0 +1,9 @@
+@import url('../../assets/styles/scss/_colors.scss');
+
+.content {
+    min-height: calc(100vh - 128px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
