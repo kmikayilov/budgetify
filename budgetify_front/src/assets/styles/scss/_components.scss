@@ -1,4 +1,4 @@
-@import './_colors';
+@import './_colors.scss';
 
 .custom-btn {
     display: flex;
@@ -50,4 +50,255 @@
         font-size: 18px;
         line-height: 18px;
     }
+}
+
+.sign-in,
+.sign-up {
+    width: 550px;
+    min-height: 530px;
+
+	display: flex;
+	flex-direction: column;
+
+    color: $color-slate-100;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+
+    .title-wrapper {
+        width: 100%;
+
+        text-align: center;
+        font-size: 64px;
+        line-height: 64px;
+    }
+
+    .form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+
+        .input-wrapper {
+            width: 100%;
+
+            margin-bottom: 30px;
+
+            .form-control {
+                max-width: 512px;
+                height: 62px;
+                border-radius: 16px;
+
+                display: flex;
+                align-items: center;
+
+                margin-bottom: 14px;
+
+                &.valid {
+
+                    & .input {
+                        border-color: $color-emerald-600;
+
+                        &:focus {
+                            border-color: $color-emerald-600;
+                        }
+                    }
+
+                    & .icon {
+                        color: $color-emerald-600;
+                    }
+                }
+
+                &.invalid {
+                    
+                    & .input {
+                        border-color: $color-red-600;
+
+                        &:focus {
+                            border-color: $color-red-600;
+                        }
+                    }
+
+                    & .icon {
+                        color: $color-red-600;
+                    }
+                }
+        
+                & .input {
+                    width: 100%;
+                    height: 100%;
+        
+                    border-radius: 16px;
+                    background-color: $color-slate-900;
+        
+                    outline: none;
+                    border: 1px solid $color-slate-900;
+        
+                    padding: 0 0 0 58px;
+                    
+                    color: $color-slate-100;
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 28px;
+        
+                    &:focus {
+                        border: 1px solid $color-sky-200;
+                    }
+        
+                    &::placeholder {
+                        color: $color-slate-600;
+                        font-size: 20px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 28px;
+        
+                        @media (max-width: 360px) {
+                            font-size: 16px;
+                            line-height: 24px;
+                        }
+                    }
+                }
+
+                & .icon {
+                    position: absolute;
+                    padding: 22px 16px 22px 24px;
+                    width: 18px;
+                    height: 18px;
+                    color: $color-amber-400;
+
+                    @media (max-width: 360px) {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+
+            .form-control-error {
+
+            }
+
+            .form-control.valid + .form-control-error {
+                color: $color-emerald-600;
+            }
+
+            .form-control.invalid + .form-control-error {
+                color: $color-red-600;
+            }
+        }
+
+        .submit-btn {
+            display: flex;
+            align-items: center;
+
+            border-radius: 12px;
+            border: 1px solid $color-cyan-800;
+
+            padding: 8px 20px;
+            background-color: $color-cyan-800;
+
+            color: $color-slate-200;
+
+            font-family: "Inter" sans-serif;
+            font-size: 22px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 22px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+    }
+
+    .link {
+        // color: $grey-text-bg;
+        cursor: pointer;
+        &:hover {
+            // color: $violet-active-text-bg;
+        }
+    }
+
+	@media (max-width: 650px) {
+		// .auth-modal {
+			width: 400px;
+
+			.title-wrapper {
+				.custom {
+					&-col {
+						svg {
+							width: 40px;
+						}
+					}
+
+					&-row {
+						h4 {
+							font-size: 25px;
+						}
+
+						h6 {
+							font-size: 15px;
+						}
+					}
+				}
+			}
+
+			form {
+				margin-top: 30px;
+
+				div {
+					div {
+						div {
+							&:nth-child(2) {
+								flex-grow: 0;
+								max-width: 100%;
+								flex-basis: 89%;
+							}
+						}
+					}
+				}
+			}
+		// }
+	}
+
+	@media (max-width: 450px) {
+		// .auth-modal {
+			width: 300px;
+
+			.title-wrapper {
+				.custom {
+					&-col {
+						svg {
+							width: 30px;
+						}
+					}
+
+					&-row {
+						h4 {
+							font-size: 20px;
+						}
+
+						h6 {
+							font-size: 12px;
+						}
+					}
+				}
+			}
+
+			form {
+				div {
+					div {
+						div {
+							&:nth-child(2) {
+								flex-basis: 84%;
+							}
+						}
+					}
+				}
+			}
+		// }
+	}
 }

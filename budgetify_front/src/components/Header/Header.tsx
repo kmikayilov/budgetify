@@ -22,7 +22,7 @@ const Header: React.FC= () => {
 
 	// const user = useSelector((store: any) => store.auth.loggedUser, shallowEqual)
 
-	const user: boolean = true
+	const user: boolean = false
 
 	return (
 		<header className="header">

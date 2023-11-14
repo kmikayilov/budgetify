@@ -4,8 +4,10 @@ import React, { useEffect, useCallback } from 'react';
 
 // import SignIn from './components/SignIn/SignIn';
 // import SignUp from './components/SignUp/SignUp';
-import Home from './components/Home/Home';
-
+import Dashboard from './components/Dashboard/Dashboard';
+import SignIn from './components/SignIn/SignIn';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 // import { fetchLoggedUser, logout } from './helpers/state/authSlice';
 // import { loaded } from './helpers/state/commonSlice';
 
@@ -31,14 +33,22 @@ function App() {
   
   return (
     <Router>
-			<div className="App">
+		<div className="App">
+			<Header />
+			<div className="content">
 				<Routes>
+					{/* <Route path="/transactions" Component={TransactionsList} /> */}
+					{/* <Route path="/transactions/new" Component={TransactionAdd} /> */}
+					{/* <Route path="/transaction/:id" Component={TransactionEdit} /> */}
+					{/* <Route path="/analysis" Component={Analysis} /> */}
 					{/* <Route path="/sign-up" Component={SignUp} /> */}
-					{/* <Route path="/sign-in" Component={SignIn} /> */}
-					<Route path="/" Component={Home} />
+					<Route path="/sign-in" Component={SignIn} />
+					<Route path="/" Component={Dashboard} />
 				</Routes>
 			</div>
-		</Router>
+			<Footer />
+		</div>
+	</Router>
   );
 }
 
