@@ -6,6 +6,7 @@ import React, { useEffect, useCallback } from 'react';
 // import SignUp from './components/SignUp/SignUp';
 import Dashboard from './components/Dashboard/Dashboard';
 import SignIn from './components/SignIn/SignIn';
+import SignUp from './components/SignUp/SignUp';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 // import { fetchLoggedUser, logout } from './helpers/state/authSlice';
@@ -41,7 +42,7 @@ function App() {
 					{/* <Route path="/transactions/new" Component={TransactionAdd} /> */}
 					{/* <Route path="/transaction/:id" Component={TransactionEdit} /> */}
 					{/* <Route path="/analysis" Component={Analysis} /> */}
-					{/* <Route path="/sign-up" Component={SignUp} /> */}
+					<Route path="/sign-up" Component={SignUp} />
 					<Route path="/sign-in" Component={SignIn} />
 					<Route path="/" Component={Dashboard} />
 				</Routes>

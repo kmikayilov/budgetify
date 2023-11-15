@@ -1,13 +1,13 @@
+import { useFormik, FormikTouched, FormikErrors } from 'formik';
 import React, { useCallback } from 'react';
-import { Formik } from 'formik';
-// import { schema, initialValue } from './schema';
-// import { useNavigate } from 'react-router-dom';
+import * as yup from 'yup';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLock, faCircleUser } from '@fortawesome/free-solid-svg-icons';
+
+import { Formik } from '../../helpers/utils';
+import { useNavigate } from 'react-router-dom';
 // import { toast } from 'react-toastify';
-import { Box, Button, FormHelperText, Grid, Typography, TextField } from '@mui/material';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import LockIcon from '@mui/icons-material/Lock';
-import EmailIcon from '@mui/icons-material/Email';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 // import { LinkContainer } from 'react-router-bootstrap';
 // import { useDispatch } from 'react-redux';
 // import { unwrapResult } from '@reduxjs/toolkit';
@@ -15,18 +15,35 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 
 import './SignUp.scss';
 
-const initialValue = {
+interface SignUpForm {  
+    email: string;
+    username: string;
+    password: string;
+}
+
+interface SignUpFormik extends Formik {
+    values: SignUpForm;
+    touched: FormikTouched<SignUpForm>;
+    errors: FormikErrors<SignUpForm>;
+}
+
+const schema = yup.object().shape({
+	email: yup.string().email('The email format is incorrect!').required('Email is required!'),
+	username: yup.string().required('Username is required!'),
+	password: yup.string().required('Password is required!'),
+});
+
+const initialValues: SignUpForm = {
 	email: '',
 	username: '',
 	password: '',
 };
 
-
 // toast.configure();
 
-const SignUp = () => {
+const SignUp: React.FC = () => {
 	// const dispatch = useDispatch();
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	const onSubmit = useCallback(
 		(data: any, { resetForm }: any) => {
@@ -53,172 +70,90 @@ const SignUp = () => {
         []
 		// [dispatch, navigate]
 	);
+
+    const { handleSubmit, handleChange, handleBlur, values, touched, errors }: SignUpFormik = useFormik({
+        validationSchema: schema,
+        enableReinitialize: true,
+        onSubmit,
+        initialValues
+    });
+
 	return (
-		<>
-			<div className="sign-in">
-				<Box className="auth-modal">
-					<div className="title-wrapper">
-						<div className="custom-col">
-							<div className="custom-row">
-								<Typography variant="h4">Sign up</Typography>
-							</div>
-							<div className="custom-row">
-								<Typography variant="h6">Sign up on the platform</Typography>
-							</div>
-						</div>
-						<div className="custom-col">
-							<AccountBalanceIcon />
-						</div>
-					</div>
-					<Formik
-						// validationSchema={schema}
-						onSubmit={onSubmit}
-						initialValues={initialValue}
-						enableReinitialize={true}>
-						{({ handleSubmit, handleChange, handleBlur, values, touched, errors }) => {
-							return (
-								<form
-									className="form"
-									noValidate
-									onSubmit={handleSubmit}
-									autoComplete="off">
-									<Grid
-										style={{ marginBottom: '30px' }}
-										container
-										spacing={1}
-										direction="row"
-										justifyContent="center">
-										<Grid container spacing={1} alignItems="center">
-											<Grid item>
-												<EmailIcon className="icon" />
-											</Grid>
-											<Grid item xs={11}>
-												<TextField
-													name="email"
-													value={values.email}
-													onChange={handleChange}
-													onBlur={handleBlur}
-													label="Email"
-													required
-													variant="outlined"
-													className={[
-														'input-wrapper',
-														touched.email &&
-															!errors.email &&
-															'valid',
-													].join(' ')}
-													fullWidth
-													error={touched.email && !!errors.email}
-												/>
-											</Grid>
-										</Grid>
-										<Grid item>
-											{touched.email && !!errors.email && (
-												<FormHelperText>
-													{errors.email}
-												</FormHelperText>
-											)}
-										</Grid>
-									</Grid>
-									<Grid
-										style={{ marginBottom: '30px' }}
-										container
-										spacing={1}
-										direction="row"
-										justifyContent="center">
-										<Grid container spacing={1} alignItems="center">
-											<Grid item>
-												<AccountCircle className="icon" />
-											</Grid>
-											<Grid item xs={11}>
-												<TextField
-													name="username"
-													value={values.username}
-													onChange={handleChange}
-													onBlur={handleBlur}
-													label="Username"
-													required
-													variant="outlined"
-													className={[
-														'input-wrapper',
-														touched.username &&
-															!errors.username &&
-															'valid',
-													].join(' ')}
-													fullWidth
-													error={
-														touched.username &&
-														!!errors.username
-													}
-												/>
-											</Grid>
-										</Grid>
-										<Grid item>
-											{touched.username && !!errors.username && (
-												<FormHelperText>
-													{errors.username}
-												</FormHelperText>
-											)}
-										</Grid>
-									</Grid>
-									<Grid container spacing={1} justifyContent="center">
-										<Grid container spacing={1} alignItems="center">
-											<Grid item>
-												<LockIcon className="icon" />
-											</Grid>
-											<Grid item xs={11}>
-												<TextField
-													type="password"
-													name="password"
-													value={values.password}
-													onChange={handleChange}
-													onBlur={handleBlur}
-													label="Password"
-													required
-													variant="outlined"
-													className={[
-														'input-wrapper',
-														touched.password &&
-															!errors.password &&
-															'valid',
-													].join(' ')}
-													fullWidth
-													error={
-														touched.password &&
-														!!errors.password
-													}
-												/>
-											</Grid>
-										</Grid>
-										<Grid item>
-											{touched.password && !!errors.password && (
-												<FormHelperText>
-													{errors.password}
-												</FormHelperText>
-											)}
-										</Grid>
-									</Grid>
-									<Button
-										className="btn"
-										fullWidth
-										variant="contained"
-										color="primary"
-										type="submit">
-										Sign up
-									</Button>
-								</form>
-							);
-						}}
-					</Formik>
-					<Box style={{ marginTop: 30, display: 'flex', justifyContent: 'flex-start' }}>
-						{/* <LinkContainer to="/sign-in" className="link">
-							<Typography variant="subtitle1">Sign in</Typography>
-						</LinkContainer> */}
-					</Box>
-				</Box>
-				);
-			</div>
-		</>
+		<div className="sign-up">
+            <div className="title-wrapper">Sign up</div>
+            <form
+                className="form"
+                noValidate
+                onSubmit={handleSubmit}
+                autoComplete="off"
+            >
+                <div className="input-wrapper">
+                    <div className={['form-control', touched.email && !errors.email ? 'valid' : '', touched.email && !!errors.email ? 'invalid' : '' ].join(' ')}>
+                        <FontAwesomeIcon icon={faEnvelope} className="icon" />
+                        <input 
+                            type='email' 
+                            name='email' 
+                            placeholder='Email' 
+                            onChange={handleChange} 
+                            onBlur={handleBlur}
+                            value={values.email} 
+                            className='input'
+                            required 
+                        />
+                    </div>
+                    <div className="form-control-error">
+                        {
+                            touched.email && !!errors.email && errors.email
+                        }
+                    </div>
+                </div>
+
+                <div className="input-wrapper">
+                    <div className={['form-control', touched.username && !errors.username ? 'valid' : '', touched.username && !!errors.username ? 'invalid' : '' ].join(' ')}>
+                        <FontAwesomeIcon icon={faCircleUser} className="icon" />
+                        <input
+                            type='username' 
+                            name='username' 
+                            placeholder='Username' 
+                            onChange={handleChange} 
+                            onBlur={handleBlur}
+                            value={values.username} 
+                            className='input'
+                            required 
+                        />
+                    </div>
+                    <div className="form-control-error">
+                        {
+                            touched.username && !!errors.username && errors.username
+                        }
+                    </div>
+                </div>
+
+                <div className="input-wrapper">
+                    <div className={['form-control', touched.password && !errors.password ? 'valid' : '', touched.password && !!errors.password ? 'invalid' : '' ].join(' ')}>
+                        <FontAwesomeIcon icon={faLock} className="icon" />
+                        <input 
+                            type='text'
+                            name='password' 
+                            placeholder='Password' 
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.password} 
+                            className='input'
+                            required 
+                        />
+                    </div>
+                    <div className="form-control-error">
+                        {
+                            touched.password && !!errors.password && errors.password
+                        }
+                    </div>
+                </div>
+
+                <button className='submit-btn' type='submit'>Sign up</button>
+            </form>
+            <div className='custom-link' onClick={ () => navigate('/sign-in') }>Go to sign in</div>
+		</div>
 	);
 };
 

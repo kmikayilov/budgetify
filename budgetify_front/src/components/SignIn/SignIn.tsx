@@ -1,8 +1,9 @@
-import React, { useCallback } from 'react';
 import { useFormik, FormikTouched, FormikErrors } from 'formik';
+import React, { useCallback } from 'react';
 import * as yup from 'yup';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
+import { Formik } from '../../helpers/utils';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
@@ -11,12 +12,6 @@ import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 // import { unwrapResult } from '@reduxjs/toolkit';
 // import { loginUser } from '../../helpers/state/authSlice';
 
-// import { Box, Button, FormHelperText, Grid, Typography, TextField } from '@mui/material';
-// import EmailIcon from '@mui/icons-material/Email';
-// import LockIcon from '@mui/icons-material/Lock';
-// import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-// import { LinkContainer } from 'react-router-bootstrap';
-
 import './SignIn.scss';
 
 interface SignInForm {  
@@ -24,16 +19,7 @@ interface SignInForm {
     password: string;
 }
 
-interface SignInFormik {
-    handleSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
-    handleChange: {
-        (e: React.ChangeEvent<any>): void;
-        <T = string | React.ChangeEvent<any>>(field: T): T extends React.ChangeEvent<any> ? void : (e: string | React.ChangeEvent<any>) => void;
-    };
-    handleBlur: {
-        (e: React.FocusEvent<any, Element>): void;
-        <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
-    };
+interface SignInFormik extends Formik {
     values: SignInForm;
     touched: FormikTouched<SignInForm>;
     errors: FormikErrors<SignInForm>;
@@ -44,7 +30,7 @@ const schema = yup.object().shape({
 	password: yup.string().required('Password is required!'),
 });
 
-const initialValues = {
+const initialValues: SignInForm = {
 	// email: 'kenan.mikayilov.00@gmail.com',
 	// password: 'KM_jr2000',
 	email: '',
@@ -53,7 +39,7 @@ const initialValues = {
 
 const SignIn: React.FC = () => {
 	// const dispatch = useDispatch();
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
     
 	const onSubmit = useCallback(
@@ -85,7 +71,7 @@ const SignIn: React.FC = () => {
         enableReinitialize: true,
         onSubmit,
         initialValues
-    })
+    });
 
 	return (
 		<div className="sign-in">
@@ -140,6 +126,7 @@ const SignIn: React.FC = () => {
 
                 <button className='submit-btn' type='submit'>Sign in</button>
             </form>
+            <div className='custom-link' onClick={ () => navigate('/sign-up') }>Go to sign up</div>
 		</div>
 	);
 };
