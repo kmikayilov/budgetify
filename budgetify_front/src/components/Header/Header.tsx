@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
 import HeaderLogo from '../../assets/static/icons/budgetify.svg';
@@ -12,7 +12,7 @@ import { faReceipt, faHouse, faCircleUser } from '@fortawesome/free-solid-svg-ic
 
 import './Header.scss';
 
-const Header: React.FC= () => {
+const Header: FC= () => {
 	const navigate = useNavigate();
 
 	// const logoutHandler = useCallback(() => {

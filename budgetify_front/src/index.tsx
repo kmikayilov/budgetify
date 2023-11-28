@@ -1,15 +1,11 @@
 import ReactDOM from 'react-dom/client';
+import { Provider } from "react-redux";
 import React from 'react';
 
+import { store } from './helpers/state/store'
 import App from './App';
 
 import reportWebVitals from './reportWebVitals';
-
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import "bootstrap/dist/css/bootstrap.min.css"
-// import 'react-datepicker/dist/react-datepicker.css';
-// import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-// import 'react-toastify/dist/ReactToastify.css';
 
 import './index.scss';
 
@@ -19,7 +15,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 

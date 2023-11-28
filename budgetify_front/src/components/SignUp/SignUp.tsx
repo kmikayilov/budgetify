@@ -1,5 +1,5 @@
 import { useFormik, FormikTouched, FormikErrors } from 'formik';
-import React, { useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import * as yup from 'yup';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -41,7 +41,7 @@ const initialValues: SignUpForm = {
 
 // toast.configure();
 
-const SignUp: React.FC = () => {
+const SignUp: FC = () => {
 	// const dispatch = useDispatch();
 	const navigate = useNavigate();
 

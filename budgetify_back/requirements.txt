@@ -1,0 +1,17 @@
+Django>=3.2
+gunicorn
+psycopg2-binary
+psycopg2
+
+Pillow
+requests
+djangorestframework
+markdown
+django-filter
+djangorestframework-datatables
+
+flake8
+django-cors-headers
+django-rest-knox
+pyjwt
+djangorestframework-simplejwt

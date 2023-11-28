@@ -1,4 +1,4 @@
-import React from "react"
+import { FC } from "react"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareGithub, faLinkedin  } from '@fortawesome/free-brands-svg-icons';
@@ -7,7 +7,7 @@ import "./Footer.scss"
 
 import FooterLogo from "../../assets/static/icons/budgetify-v2.svg";
 
-const Footer: React.FC = () => (
+const Footer: FC = () => (
 	<footer className="footer">
         <div className="footer__logo">
             <div className="footer__logo__wrapper">

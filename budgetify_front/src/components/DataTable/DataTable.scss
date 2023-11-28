@@ -1,0 +1,152 @@
+@import '../../assets/styles/scss/colors';
+
+table {
+    // border: 1px solid $color-slate-200;
+    
+    thead {
+        
+        tr {
+            
+            th {
+                text-align: start;
+                color: $color-slate-200;
+                // padding: 5px 10px;
+                box-sizing: border-box;
+                border-bottom: 3px solid $color-slate-900;
+
+                user-select: none;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                .sort {
+                    margin-left: 5px;
+                    color: $color-amber-400;
+
+                    svg {
+                        width: 18px;
+                        height: 18px;
+                    }
+                }
+            }
+        }
+
+    }
+    
+    tbody {
+        
+        tr {
+            
+            td {
+                // padding: 5px 10px;
+                color: $color-slate-200;
+                box-sizing: border-box;
+            }
+        }
+    }
+
+
+    td.icon {
+        padding: 5px;
+
+        .icon-btn {
+
+            outline: none;
+            border: none;
+            background-color: $color-dark;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            width: 18px;
+            height: 18px;
+            
+            &.add {
+                color: $color-teal-600;
+            }
+    
+            &.edit {
+                color: $color-amber-400;
+            }
+            
+            &.delete {
+                color: $color-red-600;
+            }
+
+            svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+
+
+
+    }
+
+    th.col-tretiary,
+    td.col-tretiary {
+        width: 60px;
+    }
+
+    th.col-primary,
+    td.col-primary {
+        width: 120px;
+    }
+
+    th.col-secondary,
+    td.col-secondary {
+        width: 180px;
+    }
+
+    th {
+        padding: 5px 10px;
+    }
+
+    td {
+
+        padding: 5px 10px;
+
+        .form-control {
+            width: 100%;
+
+            // width: 100%;
+            // height: 100%;
+            box-sizing: border-box;
+
+            border-radius: 8px;
+            background-color: $color-slate-900;
+
+            outline: none;
+            border: none;
+
+            padding: 5px 10px;
+            
+            color: $color-slate-100;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 14px;
+
+
+            &:focus {
+                border: 1px solid $color-sky-200;
+            }
+
+            &::placeholder {
+                color: $color-slate-600;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+            }
+        }
+
+        select.form-control {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+    }
+}

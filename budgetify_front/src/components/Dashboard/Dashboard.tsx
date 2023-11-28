@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 
 import './Dashboard.scss';
 
-const Dashboard: React.FC = () => {
+const Dashboard: FC = () => {
 
     return (
         <></>

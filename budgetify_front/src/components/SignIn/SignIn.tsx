@@ -1,5 +1,5 @@
 import { useFormik, FormikTouched, FormikErrors } from 'formik';
-import React, { useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
@@ -37,7 +37,7 @@ const initialValues: SignInForm = {
 	password: '',
 };
 
-const SignIn: React.FC = () => {
+const SignIn: FC = () => {
 	// const dispatch = useDispatch();
 	const navigate = useNavigate();
 
