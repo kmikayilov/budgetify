@@ -150,7 +150,7 @@ class TransactionSerializer(serializers.ModelSerializer):
         repr_ = super().to_representation(instance)
         
         repr_['category'] = CategorySerializer(instance.category).data
-        repr_['payment_method'] = CategorySerializer(instance.payment_method).data
+        repr_['payment_method'] = PaymentMethodSerializer(instance.payment_method).data
 
         for field, value in repr_.items():
             if not value:

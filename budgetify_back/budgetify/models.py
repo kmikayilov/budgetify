@@ -56,7 +56,7 @@ class Category(models.Model):
     accounting = models.ForeignKey(Accounting, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f"{self.id} {self.category} ({self.accounting.id})"
+        return f"{self.id} {self.name} ({self.accounting.id})"
 
 
 class PaymentMethod(models.Model):

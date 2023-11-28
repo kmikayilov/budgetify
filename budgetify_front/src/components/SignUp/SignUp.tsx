@@ -3,7 +3,7 @@ import { FC, useCallback } from 'react';
 import * as yup from 'yup';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLock, faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 
 import { Formik } from '../../helpers/utils';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +17,6 @@ import './SignUp.scss';
 
 interface SignUpForm {  
     email: string;
-    username: string;
     password: string;
 }
 
@@ -29,13 +28,11 @@ interface SignUpFormik extends Formik {
 
 const schema = yup.object().shape({
 	email: yup.string().email('The email format is incorrect!').required('Email is required!'),
-	username: yup.string().required('Username is required!'),
 	password: yup.string().required('Password is required!'),
 });
 
 const initialValues: SignUpForm = {
 	email: '',
-	username: '',
 	password: '',
 };
 
@@ -104,27 +101,6 @@ const SignUp: FC = () => {
                     <div className="form-control-error">
                         {
                             touched.email && !!errors.email && errors.email
-                        }
-                    </div>
-                </div>
-
-                <div className="input-wrapper">
-                    <div className={['form-control', touched.username && !errors.username ? 'valid' : '', touched.username && !!errors.username ? 'invalid' : '' ].join(' ')}>
-                        <FontAwesomeIcon icon={faCircleUser} className="icon" />
-                        <input
-                            type='username' 
-                            name='username' 
-                            placeholder='Username' 
-                            onChange={handleChange} 
-                            onBlur={handleBlur}
-                            value={values.username} 
-                            className='input'
-                            required 
-                        />
-                    </div>
-                    <div className="form-control-error">
-                        {
-                            touched.username && !!errors.username && errors.username
                         }
                     </div>
                 </div>

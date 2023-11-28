@@ -14,11 +14,14 @@ import './TransactionList.scss';
 
 import DataTable from '../DataTable/DataTable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const TransactionList = () => {
     
+	const navigate = useNavigate()
+
 	const [ showFilterPanel, setShowFilterPanel ] = useState<boolean>(false)
+	const [ totalCount, setTotalCount ] = useState<number>(0)
 
 	// const dispatch = useDispatch();
 	// const transactions = useSelector((state) => state.transaction.transactions, shallowEqual);
@@ -45,12 +48,13 @@ const TransactionList = () => {
 		<div className="list-items">
 			<div className="list-items-title">Transactions</div>
 			<div className="list-items-info">
-                <div className="list-items-info-count">Found <span className="count"></span> transactions</div>
+                <div className="list-items-info-count">Found <span className="count">{totalCount}</span> transactions</div>
                 <div className="list-items-layout">
-					<button className="btn" onClick={ () => setShowFilterPanel( prevState => !prevState )}><FontAwesomeIcon icon={faSearch} /></button>
+					<button className="btn add" onClick={ () => navigate('/transactions/new') }><FontAwesomeIcon icon={faPlus} /></button>
+					<button className="btn search" onClick={ () => setShowFilterPanel( prevState => !prevState )}><FontAwesomeIcon icon={faSearch} /></button>
                 </div>
             </div>
-			<DataTable showFilterPanel={showFilterPanel} />
+			<DataTable showFilterPanel={showFilterPanel} setTotalCount={setTotalCount} totalCount={totalCount} />
 		</div>
 	);
 };

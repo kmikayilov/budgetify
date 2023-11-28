@@ -44,14 +44,12 @@ class TransactionCreateAPiView(generics.CreateAPIView):
     serializer_class = TransactionSerializer
 
     def post(self, request, *args, **kwargs):
-        # print('req: ', request.data)
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         print('ser data: ', serializer.data)
 
         return Response(serializer.data, status=201)
-        # return Response({}, status=201)
 
 
 class TransactionDetailAPIview(generics.RetrieveUpdateDestroyAPIView):

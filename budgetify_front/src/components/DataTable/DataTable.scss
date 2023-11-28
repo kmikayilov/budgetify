@@ -63,12 +63,8 @@ table {
             width: 18px;
             height: 18px;
             
-            &.add {
-                color: $color-teal-600;
-            }
-    
             &.edit {
-                color: $color-amber-400;
+                color: $color-teal-600;
             }
             
             &.delete {

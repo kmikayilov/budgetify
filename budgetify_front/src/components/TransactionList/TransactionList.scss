@@ -80,6 +80,10 @@
             outline: none;
             color: $color-amber-400;
 
+            &.add {
+                margin-right: 10px;
+            }
+
             &:hover{
                cursor: pointer; 
             }
