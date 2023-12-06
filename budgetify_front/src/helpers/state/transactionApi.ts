@@ -22,7 +22,23 @@ export const TransactionAPI = createApi({
             providesTags: (result, error, arg) => result?.results ? [...result?.results?.map(({ id }) => ({ type: 'Transaction' as const, id })), 'Transaction'] : ['Transaction'],
             transformResponse: (response: ITransactionResult) => response
         }),
+        getTransaction: builder.query<ITransaction, Partial<string>>({
+            query: (id) => `transactions/detail/${id}`,
+            // invalidatesTags: 'Transaction',
+            // providesTags: (result, error, arg) => ['Transaction'],
+            transformResponse: (response: ITransaction) => response
+        }),
+        addTransaction: builder.mutation<ITransaction, Partial<ITransaction>>({
+            query: (body) => ({ url: `transactions/create`, method: 'POST', body }),
+            // invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
+            transformResponse: (response: ITransaction) => response
+        }),
+        editTransaction: builder.mutation<ITransaction, Partial<{ id: string, transaction: ITransaction}>>({
+            query: (data) => ({ url: `transactions/detail/${data.id}`, method: 'POST', body: data.transaction }),
+            // invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
+            transformResponse: (response: ITransaction) => response
+        }),
     }),
 })
 
-export const { useGetTransactionsQuery } = TransactionAPI
+export const { useGetTransactionsQuery, useGetTransactionQuery, useAddTransactionMutation, useEditTransactionMutation } = TransactionAPI

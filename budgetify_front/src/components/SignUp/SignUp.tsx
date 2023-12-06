@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 
-import { Formik } from '../../helpers/utils';
+import { Formik } from '../../helpers/types';
 import { useNavigate } from 'react-router-dom';
 // import { toast } from 'react-toastify';
 // import { LinkContainer } from 'react-router-bootstrap';

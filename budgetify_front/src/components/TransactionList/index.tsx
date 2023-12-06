@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef} from 'react';
+import { FC, useState, useCallback, useEffect, useRef} from 'react';
 // import { headers, setNavigate } from './tableConfig';
 // import TransactionsTable from './TransactionsTable';
 // import { Typography, Box } from '@mui/material';
@@ -9,14 +9,14 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // import { filterTransactions } from '../../helpers/state/transactionSlice';
 // import { setFetchType } from '../../helpers/state/transactionSlice';
-// import TransactionDelete from '../TransactionDelete/TransactionDelete';
+import TransactionDelete from '../TransactionDelete';
 import './TransactionList.scss';
 
-import DataTable from '../DataTable/DataTable';
+import DataTable from './DataTable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const TransactionList = () => {
+const TransactionList: FC = () => {
     
 	const navigate = useNavigate()
 
@@ -43,19 +43,28 @@ const TransactionList = () => {
 	// }, []);
 
 	//---------------------------------------
+
+	// const isShownDelete = useSelector((state) => state.transaction.fetchType === 'delete' && !!state.transaction.transaction, shallowEqual);
+
+	// const onDeleteClose = useCallback(() => {
+	// 	dispatch(setFetchType(''));
+	// }, [dispatch]);
 	
 	return (
-		<div className="list-items">
-			<div className="list-items-title">Transactions</div>
-			<div className="list-items-info">
-                <div className="list-items-info-count">Found <span className="count">{totalCount}</span> transactions</div>
-                <div className="list-items-layout">
-					<button className="btn add" onClick={ () => navigate('/transactions/new') }><FontAwesomeIcon icon={faPlus} /></button>
-					<button className="btn search" onClick={ () => setShowFilterPanel( prevState => !prevState )}><FontAwesomeIcon icon={faSearch} /></button>
-                </div>
-            </div>
-			<DataTable showFilterPanel={showFilterPanel} setTotalCount={setTotalCount} totalCount={totalCount} />
-		</div>
+		<>
+			<TransactionDelete isShown={true} handleClose={ () => { console.log('close transaction delete modal!') } } />
+			<div className="list-items">
+				<div className="list-items-title">Transactions</div>
+				<div className="list-items-info">
+					<div className="list-items-info-count">Found <span className="count">{totalCount}</span> transactions</div>
+					<div className="list-items-layout">
+						<button className="btn add" onClick={ () => navigate('/transactions/new') }><FontAwesomeIcon icon={faPlus} /></button>
+						<button className="btn search" onClick={ () => setShowFilterPanel( prevState => !prevState )}><FontAwesomeIcon icon={faSearch} /></button>
+					</div>
+				</div>
+				<DataTable showFilterPanel={showFilterPanel} setTotalCount={setTotalCount} totalCount={totalCount} />
+			</div>
+		</>
 	);
 };
 

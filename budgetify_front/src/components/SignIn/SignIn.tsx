@@ -3,7 +3,7 @@ import { FC, useCallback } from 'react';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
-import { Formik } from '../../helpers/utils';
+import { Formik } from '../../helpers/types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';

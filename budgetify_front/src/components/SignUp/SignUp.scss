@@ -1,0 +1,14 @@
+@import '../../assets/styles/scss/colors.scss';
+
+.sign-up {
+    width: 550px;
+    min-height: 530px;
+
+    margin-top: 50px;
+
+	display: flex;
+	flex-direction: column;
+
+    color: $color-slate-100;
+    font-weight: 700;
+}

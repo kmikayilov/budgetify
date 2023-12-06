@@ -3,10 +3,10 @@ import { FC, useState, useCallback, useEffect, useRef, SetStateAction, Dispatch}
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPenToSquare, faTrash, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
-import { useGetCategoriesQuery, useGetPaymentMethodsQuery, useGetAccountingsQuery } from '../../helpers/state/listsApi';
-import { useGetTransactionsQuery } from '../../helpers/state/transactionApi' 
+import { useGetCategoriesQuery, useGetPaymentMethodsQuery, useGetAccountingsQuery } from '../../../helpers/state/listsApi';
+import { useGetTransactionsQuery } from '../../../helpers/state/transactionApi' 
 
-import { ISort, ITransaction, IFilter, ICurrentFilter } from '../../helpers/types'
+import { ISort, ITransaction, IFilter, ICurrentFilter } from '../../../helpers/types'
 
 import './DataTable.scss'
 
