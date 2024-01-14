@@ -1,10 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
 import type { ITransaction, ITransactionQuery, ITransactionResult } from '../types'
 
-const baseUrl = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:8000/api/' : 'https://' + window.location.host + '/api/';
+import { baseQuery } from './api';
 
 export const TransactionAPI = createApi({
-    baseQuery: fetchBaseQuery({ baseUrl }),
+    baseQuery,
     reducerPath: 'transaction-api',
     tagTypes: ['Transaction'],
     endpoints: (builder) => ({
@@ -33,12 +33,18 @@ export const TransactionAPI = createApi({
             // invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
             transformResponse: (response: ITransaction) => response
         }),
-        editTransaction: builder.mutation<ITransaction, Partial<{ id: string, transaction: ITransaction}>>({
-            query: (data) => ({ url: `transactions/detail/${data.id}`, method: 'POST', body: data.transaction }),
+        updateTransaction: builder.mutation<ITransaction, Partial<{ id: string, transaction: ITransaction}>>({
+            query: (data) => ({ url: `transactions/detail/${data.id}`, method: 'PATCH', body: data.transaction }),
             // invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
             transformResponse: (response: ITransaction) => response
         }),
+        deleteTransaction: builder.mutation<ITransaction, Partial<string>>({
+            query: (id) => ({ url: `transactions/detail/${id}`, method: 'DELETE' }),
+            // invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
+            transformResponse: (response: ITransaction) => response
+        }),
+        
     }),
 })
 
-export const { useGetTransactionsQuery, useGetTransactionQuery, useAddTransactionMutation, useEditTransactionMutation } = TransactionAPI
+export const { useGetTransactionsQuery, useGetTransactionQuery, useAddTransactionMutation, useUpdateTransactionMutation, useDeleteTransactionMutation } = TransactionAPI

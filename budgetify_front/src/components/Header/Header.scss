@@ -4,6 +4,8 @@
 .header {
     height: 64px;
 
+	box-sizing: border-box;
+
     padding: 0 72px;
     
     display: flex;
@@ -11,9 +13,21 @@
     
     background-color: $color-dark;
 
+	@media (max-width: 1100px) {
+		padding: 0 20px;
+	}
+
     &__logo {
         width: 196px;
         height: 32px;
+
+		@media (max-width: 900px) {
+            width: 147px;
+        }
+
+		@media (max-width: 800px) {
+            width: 107px;
+        }
 
         @media (max-width: 360px) {
             width: 147px;
@@ -25,6 +39,10 @@
             height: 100%;
 			
         }
+
+		&:hover {
+			cursor: pointer;
+		}
     }
 
 	&__navbar {
@@ -32,6 +50,10 @@
 		height: 32px;
 
 		margin-left: 50px;
+
+		@media (max-width: 560px) {
+			margin-left: 20px;
+		}
 
 		display: flex;
 		align-items: center;
@@ -41,32 +63,59 @@
 		&__item {
 			margin-right: 20px;
 
+			@media (max-width: 560px) {
+				.icon {
+					display: block !important;
+				}
+
+				.title {
+					display: none;
+				}
+			}
+
+			@media (max-width: 430px) {
+				display: none;
+			}
+
 		}
+
+
 	}
 	&__account {
 		display: flex;
 		align-items: center;
+
 		
 		&__info {
 			display: flex;
     		align-items: center;	
 			padding: 8px 20px;
 			color: $color-slate-200;
-
+			
 			font-family: "Inter" sans-serif;
 			font-size: 14px;
 			font-style: normal;
 			font-weight: 400;
 			line-height: 16px;
 			
+			@media (max-width: 670px) {
+				display: none;
+			}
+			
 			.icon {
 				margin-right: 5px;
 				height: 18px;
 				width: 18px;
 
+				position: relative;
+
 				svg {
 					width: 100%;
 					height: 100%;
+
+					position: absolute;
+					top: 0;
+					left: 0;
 				}
 			}
 
@@ -74,16 +123,76 @@
 				font-size: 18px;
 				line-height: 18px;
 			}
-		}
 
+			@media (max-width: 900px) {
+				.icon {
+					width: 14px;
+					height: 14px;
+				}
+				
+				.username {
+					font-size: 14px;
+					line-height: 14px;
+				}
+			}
+
+			@media (max-width: 800px) {
+				.icon {
+					width: 12px;
+					height: 12px;
+				}
+				
+				.username {
+					font-size: 12px;
+					line-height: 12px;
+				}
+			}
+		}
 	}
 
     @media (max-width: 768px) {
         padding-left: 20px;
     }
 
+	@media (max-width: 450px) {
+        padding-right: 20px;
+    }
+
     @media (max-width: 360px) {
-        height: 56px;
         padding-left: 16px;
     }
+
+	.custom-btn {
+
+		@media (max-width: 900px) {
+			.icon {
+				width: 14px;
+				height: 14px;
+			}
+			
+			.title {
+				font-size: 14px;
+				line-height: 14px;
+			}
+		}
+
+		@media (max-width: 800px) {
+			.icon {
+				display: none;
+			}
+			
+			.title {
+				font-size: 12px;
+				line-height: 12px;
+			}
+		}
+
+
+		@media (max-width: 450px) {
+			.title {
+				font-size: 14px;
+				line-height: 16px;
+			}
+		}
+	}
 }

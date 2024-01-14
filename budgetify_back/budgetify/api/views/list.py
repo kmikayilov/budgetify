@@ -1,6 +1,8 @@
 from django_filters.rest_framework.backends import DjangoFilterBackend
 from rest_framework import generics
 
+from budgetify.api.permissions import UserAuthPermission
+
 from budgetify.api import serializers, filters
 from budgetify import models
 
@@ -10,6 +12,7 @@ class CategoryListAPIView(generics.ListAPIView):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = filters.CategoryFilter
     pagination_class = None
+    permission_classes = [ UserAuthPermission ]
 
 class AccountingListAPIView(generics.ListAPIView):
     queryset = models.Accounting.objects.all().order_by('id')
@@ -17,6 +20,7 @@ class AccountingListAPIView(generics.ListAPIView):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = filters.AccountingFilter
     pagination_class = None
+    permission_classes = [ UserAuthPermission ]
     
 class PaymentMethodListAPIView(generics.ListAPIView):
     queryset = models.PaymentMethod.objects.all().order_by('id')
@@ -24,3 +28,4 @@ class PaymentMethodListAPIView(generics.ListAPIView):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = filters.PaymentMethodFilter
     pagination_class = None
+    permission_classes = [ UserAuthPermission ]

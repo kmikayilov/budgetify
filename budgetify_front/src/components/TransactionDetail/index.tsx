@@ -1,21 +1,38 @@
 import { FC, useCallback, useState, useEffect } from 'react';
 
 import { useParams, useNavigate } from 'react-router-dom';
-// import { toast } from 'react-toastify';
+
+import { toast } from 'react-toastify';
 
 import { useFormik } from 'formik';
-import { schema as validationSchema, initialValues } from './formikConfig';
+import * as yup from 'yup';
 
 import TransactionForm from './TransactionForm';
 
-import { useGetTransactionQuery, useAddTransactionMutation, useEditTransactionMutation } from '../../helpers/state/transactionApi';
+import { useGetTransactionQuery, useAddTransactionMutation, useUpdateTransactionMutation } from '../../helpers/state/transactionApi';
 
 import './TransactionDetail.scss';
 
-// import { editTransaction } from '../../helpers/state/transactionSlice';
-// import { schema, initialValue } from '../../helpers/transactionSchema';
+export interface TransactionFormStructure {  
+    date: Date;
+    amount: string;
+    category: string;
+    payment_method: string;
+}
 
-// toast.configure();
+const validationSchema = yup.object().shape({
+    date: yup.date().required('Transaction date is required'),
+    amount: yup.string().matches(/^\d+$/).required('Transaction amount is required'),
+    category: yup.string().required('Category is required'),
+    payment_method: yup.string().required('Payment method is required'),
+})
+
+const initialValues: TransactionFormStructure = {
+    date: new Date(),
+    amount: '',
+    category: '',
+    payment_method: ''
+};
 
 const TransactionDetail: FC = () => {
 	
@@ -35,12 +52,9 @@ const TransactionDetail: FC = () => {
 		}
 	}, [id])
 	
-
 	const { data: transaction } = useGetTransactionQuery(transactionId, { skip: !isEditing  });
-	const [ addTransaction, { isLoading: isAddTransactionLoading, isSuccess: isAddTransactionSuccess, isError: isAddTransactionError, error: addTransactionError } ] = useAddTransactionMutation();
-	const [ editTransaction, { isLoading: isEditTransactionLoading, isSuccess: isEditTransactionSuccess, isError: isEditTransactionError, error: editTransactionError } ] = useEditTransactionMutation();
-
-	// const isAppLoading = useSelector((state) => state.common.isLoading, shallowEqual);
+	const [ addTransaction ] = useAddTransactionMutation();
+	const [ updateTransaction ] = useUpdateTransactionMutation();
 
 	const onSubmit = useCallback(
 		(data: any, { resetForm }: any) => {
@@ -55,38 +69,37 @@ const TransactionDetail: FC = () => {
 			};
 
 			if ( isEditing ) {
-				editTransaction({ id, transaction })
-
-				if ( isEditTransactionSuccess ) {
-					// toast.success('Transaction edited successfully!');
-					navigate('transactions');
-				}
-
-				if ( isEditTransactionError ) {
-					// toast.error('Transaction edition failed!');
-					console.log('Error message', editTransactionError);
-				}
-
+				
+				updateTransaction({ id, transaction })
+					.unwrap()
+					.then( fulfilled => {
+						toast.success('Transaction updated successfully!');
+						navigate('/transactions');
+					})
+					.catch( rejected => {
+						toast.error('Transaction update failed!');
+						console.log('Error message', rejected);
+					})
+				
 			} else {
 				addTransaction(transaction)
-
-				if ( isAddTransactionSuccess ) {
-					// toast.success('Transaction edited successfully!');
-					navigate('transactions');
-				}
-
-				if ( isAddTransactionError ) {
-					// toast.error('Transaction edition failed!');
-					console.log('Error message', addTransactionError);
-				}
+					.unwrap()
+					.then( fulfilled => {
+						toast.success('Transaction created successfully!');
+						navigate('/transactions');
+					})
+					.catch( rejected => {
+						toast.error('Transaction creation failed!');
+						console.log('Error message', rejected);
+					})
 			}
 		}, 
-		[id, navigate, addTransaction, isAddTransactionSuccess, isAddTransactionError, addTransactionError, editTransaction, isEditTransactionError, isEditTransactionSuccess, editTransactionError, isEditing]
+		[id, navigate, isEditing, addTransaction, updateTransaction]
 	);
 
-	const formik = useFormik({ validationSchema, onSubmit, initialValues, enableReinitialize: true });
+	const { handleSubmit, values, touched, setFieldValue, setFieldTouched, errors, handleChange, handleBlur, resetForm, isValid } = useFormik({ validationSchema, onSubmit, initialValues, enableReinitialize: true });
 
-	useEffect(() => {	
+	useEffect(() => {
 		if (!!transaction) {
 			const values = {
 				date: new Date(transaction.date),
@@ -95,14 +108,14 @@ const TransactionDetail: FC = () => {
 				payment_method: transaction.payment_method.id.toString(),
 			};
 		  
-			if ( JSON.stringify(values) !== JSON.stringify(formik.values) ) formik.resetForm({ values });		
+			resetForm({ values });
 		}
-	}, [transaction, formik]);
-   
+	}, [transaction, resetForm]);
+	
 	return (
 		<div className='transaction-detail'>
-            <div className="title-wrapper">{ isEditing ? 'Edit the transaction' : 'Create transaction' }</div>
-				<TransactionForm { ...formik } isEditing={isEditing} />
+            <div className="title-wrapper">Transaction</div>
+			<TransactionForm { ...{ handleSubmit, values, touched, setFieldValue, setFieldTouched, errors, handleChange, handleBlur, isValid } } isEditing={isEditing} />
 		</div>
 	);
 };

@@ -5,8 +5,18 @@ export interface IUser {
     is_active: boolean;
     is_staff: boolean;
     is_superuser: boolean;
+    username: string;
 }
 
+export interface IAuth {
+    email: string;
+    password: string;
+}
+
+export interface IAuthResponse {
+    user: IUser | null;
+    token: string;
+}
 export interface IAccounting {
     id: number;
     name: string;

@@ -2,14 +2,13 @@
 
 .list-items {
     padding-top: 50px;
-    // display: flex;
-    // flex-direction: row;
-    // flex-wrap: wrap;
-    // justify-content: space-around;
+    max-width: 1120px;
+    width: 90%;
 
-    // max-width: 1152px;
-
-    // margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     &-title {
         color: $color-slate-200;
@@ -22,32 +21,31 @@
     
     &-info {
         width: 100%;
-        // max-width: 1120px;
         margin-bottom: 32px;
 
         display: flex;
         flex-direction: row;
         align-items: center;
 
-
+        
+        
         &-count {
-
+            
             color: $color-slate-200;
             font-size: 20px;
             font-style: normal;
             font-weight: 400;
             line-height: 28px;
-
+            
             flex-grow: 1;
-
+            
             text-align: start;
 
             @media (max-width: 768px) {
                 font-size: 18px;
             }
-
-
-            @media (max-width: 360px) {
+            
+            @media (max-width: 400px) {
                 font-size: 16px;
                 line-height: 24px;
             }
@@ -96,12 +94,16 @@
     }
 
     &-paginate {
-        // max-width: 1120px;
+        width: 100%;
         display: flex;
         flex-direction: row;  
         flex-wrap: wrap;
 
         margin-top: 50px;
+
+        @media (max-width: 400px) {
+            flex-direction: row-reverse;
+        }
         
 
         &-info {
@@ -119,21 +121,18 @@
                 font-size: 18px;
             }
 
-            @media (max-width: 360px) {
-                font-size: 16px;
-                line-height: 24px;
+            @media (max-width: 550px) {
+                font-size: 14px;
+            }
 
-                margin-bottom: 12px;
-
-                display: flex;
-                justify-content: center;
+            @media (max-width: 400px) {
+                display: none;
             }
 
             .count {
                 color: $color-amber-400;
                 margin: 0 5px;
             }
-
         }
 
         &-btns {
@@ -142,30 +141,43 @@
             justify-content: space-between;
             align-items: center;
 
-            @media (max-width: 360px) {
-                width: 100%;
-            }
+            .btn {
 
-            .custom-btn {
-                // width: 97px;
-                // height: 32px;
+                width: 32px;
+                height: 32px;
 
-                padding: 8px 24px;
-
-                outline: none;
-                // border: none;
-
-                border-radius: 16px;
+                padding: 0;
 
                 background-color: $color-slate-900;
-                color: $color-slate-200;
-                font-size: 14px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 16px; 
 
-                &.btn-previous {
-                    margin-right: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 8px;
+
+                border: none;
+                outline: none;
+                color: $color-amber-400;
+
+                &:hover{
+                    cursor: pointer;
+                    color: $color-amber-400; 
+                }
+
+                svg {
+                    width: 14px;
+                    height: 14px;
+                }
+                
+                &-previous {
+                    margin-right: 10px;
+                }
+
+                &.disabled {
+                    cursor: default;
+
+                    color: $color-slate-200;
+                    border-color: $color-slate-900;
                 }
             }
         }

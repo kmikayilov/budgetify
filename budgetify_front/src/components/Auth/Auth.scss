@@ -1,0 +1,142 @@
+@import '../../assets/styles/scss/colors.scss';
+
+.auth {
+    max-width: 550px;
+    width: 90%;
+    min-height: 530px;
+
+    margin-top: 50px;
+
+	display: flex;
+	flex-direction: column;
+
+
+    color: $color-slate-100;
+    font-weight: 700;
+
+    .title-wrapper {
+        font-size: 50px;
+        line-height: 55px;
+    }
+
+    .btns {
+
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        
+        .link-btn {
+            width: calc(100% / 2 - 5px);
+            text-align: center;
+    
+            border-radius: 12px;
+            border: 2px solid $color-dark;
+    
+            padding: 8px 20px;
+            background-color: $color-dark;
+    
+            color: $color-slate-200;
+    
+            font-family: "Inter" sans-serif;
+            font-size: 22px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 22px;
+
+            
+            transform: 1s border ease-out;
+            
+            &:hover {
+                cursor: pointer;
+                border-color: $color-slate-900;
+            }
+        }
+        
+        .submit-btn {
+            width: calc(100% / 2 - 5px);
+            justify-content: center;
+            margin-right: 10px;
+        }
+    }
+
+    .form {
+        .input-wrapper {
+            .form-control.password {
+
+                position: relative;
+
+                .icon {
+
+                }
+
+                .input {
+
+                }
+
+                .show-password-icon {
+
+                    position: absolute;
+
+                    top: 50%;
+                    right: 20px;
+
+                    transform: translateY(-50%);
+                    width: 18px;
+                    height: 18px;
+                    color: $color-slate-700;
+                    
+                    .icon {
+                        color: $color-slate-700;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 18px;
+                        height: 18px;
+                        padding: 0;
+
+                        &:hover {
+                            color: $color-amber-400;
+                            cursor: pointer;
+                        }
+
+                    }
+                }
+
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .title-wrapper {
+            font-size: 40px;
+            line-height: 45px;
+        }
+    }
+
+    @media (max-width: 450px) {
+        .btns {
+            .submit-btn,
+            .link-btn {
+                font-size: 17px;
+                line-height: 18px;
+            }
+        }
+    }
+
+    @media (max-width: 360px) {
+        .title-wrapper {
+            font-size: 35px;
+            line-height: 40px;
+        }
+
+        .btns {
+            .submit-btn,
+            .link-btn {
+                font-size: 14px;
+                line-height: 16px;
+            }
+        }
+    }
+
+}

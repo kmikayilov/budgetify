@@ -93,7 +93,7 @@ class UserRegisterSerialzier(serializers.ModelSerializer):
 
         user = User.objects.create(
             email=validated_data["email"],
-            is_active=False,
+            is_active=True,
         )
 
         user.set_password(validated_data["password"])
@@ -105,10 +105,14 @@ class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = [ 'id', 'email' ]
+        # fields = [ 'id', 'email' ]
+        fields = '__all__'
     
     def to_representation(self, instance):
         repr_ = super().to_representation(instance)
+        
+        repr_['username'] = instance.username
+
         
         for field, value in repr_.items():
             if not value:

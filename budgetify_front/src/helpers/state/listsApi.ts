@@ -1,10 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
 import type { ICategory, IAccounting, IPaymentMethod } from '../types'
 
-const baseUrl = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:8000/api/' : 'https://' + window.location.host + '/api/';
+import { baseQuery } from './api';
 
 export const ListAPI = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery,
   reducerPath: 'lists-api',
   tagTypes: ['Categories', 'Accountings', 'PaymentMethods'],
   endpoints: (builder) => ({

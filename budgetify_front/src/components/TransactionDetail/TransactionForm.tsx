@@ -3,14 +3,26 @@ import DatePicker from 'react-datepicker';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDollarSign, faTag, faCreditCard, faCalendar } from '@fortawesome/free-solid-svg-icons';
 
-import { useGetCategoriesQuery, useGetPaymentMethodsQuery } from '../../../helpers/state/listsApi';
+import { useGetCategoriesQuery, useGetPaymentMethodsQuery } from '../../helpers/state/listsApi';
 
-import { TransactionFormik } from '../formikConfig';
+import { TransactionFormStructure } from './index';
+
+import { FormikTouched, FormikErrors } from 'formik';
+import { Formik } from '../../helpers/types';
 
 import "react-datepicker/dist/react-datepicker.css";
-import './TransactionForm.scss';
 
-const TransactionForm: FC<TransactionFormik> = ({ handleSubmit, values, touched, setFieldValue, setFieldTouched, errors, handleChange, handleBlur, isEditing }) => {
+interface TransactionFormik extends Formik {
+    values: TransactionFormStructure;
+    touched: FormikTouched<TransactionFormStructure>;
+    errors: FormikErrors<TransactionFormStructure>;
+    setFieldTouched: (field: string, isTouched?: boolean | undefined, shouldValidate?: boolean | undefined) => Promise<void | FormikErrors<TransactionFormStructure>>;
+    setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => Promise<void | FormikErrors<TransactionFormStructure>>;
+    isEditing: boolean;
+    isValid: boolean;
+}
+
+const TransactionForm: FC<TransactionFormik> = ({ handleSubmit, values, touched, setFieldValue, setFieldTouched, errors, handleChange, handleBlur, isEditing, isValid }) => {
     
     // rtk query management
     const { data: categories } = useGetCategoriesQuery()
@@ -33,11 +45,7 @@ const TransactionForm: FC<TransactionFormik> = ({ handleSubmit, values, touched,
                         required 
                     />
                 </div>
-                <div className="form-control-error">
-                    {
-                        touched.amount && !!errors.amount && errors.amount
-                    }
-                </div>
+                <div className="form-control-error">{ touched.amount && !!errors.amount && errors.amount }</div>
             </div>
 
             <div className="input-wrapper">
@@ -47,20 +55,15 @@ const TransactionForm: FC<TransactionFormik> = ({ handleSubmit, values, touched,
                     <DatePicker
                         className='input'
                         placeholderText="Select a date"
-                        dateFormat="yyyy-mm-dd"
+                        dateFormat="dd-MM-yyyy"
                         id="date"
                         name="date"
                         selected={values.date}
                         onChange={ (val) => setFieldValue('date', val) }
                         onBlur={ () => setFieldTouched('date') }
-                        value={values.date.toString()}
                     />
                 </div>
-                <div className="form-control-error">
-                    {/* {
-                        touched.date && !!errors.date && errors.date
-                    } */}
-                </div>
+                <div className="form-control-error">{ touched.date && !!errors?.date && (<>{ errors.date }</>) }</div>
             </div>
             
             <div className="input-wrapper">
@@ -79,11 +82,7 @@ const TransactionForm: FC<TransactionFormik> = ({ handleSubmit, values, touched,
                         { categories?.map( (cat) => <option key={cat.id} value={cat.id}>{cat.name}</option> ) } 
                     </select>
                 </div>
-                <div className="form-control-error">
-                    {
-                        touched.category && !!errors.category && errors.category
-                    }
-                </div>
+                <div className="form-control-error">{ touched.category && !!errors.category && errors.category }</div>
             </div>
 
             <div className="input-wrapper">
@@ -102,14 +101,10 @@ const TransactionForm: FC<TransactionFormik> = ({ handleSubmit, values, touched,
                         { payment_methods?.map( (method) => <option key={method.id} value={method.id}>{method.name}</option> ) } 
                     </select>
                 </div>
-                <div className="form-control-error">
-                    {
-                        touched.payment_method && !!errors.payment_method && errors.payment_method
-                    }
-                </div>
+                <div className="form-control-error">{ touched.payment_method && !!errors.payment_method && errors.payment_method }</div>
             </div>
 
-            <button className='submit-btn' type='submit'>{ isEditing ? 'Edit the transaction' : 'Create transaction' }</button>
+            <button className='submit-btn' type='submit' disabled={!isValid}>{ isEditing ? 'Edit the transaction' : 'Create transaction' }</button>
         </form>
 	);
 };

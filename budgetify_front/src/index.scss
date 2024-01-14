@@ -1,4 +1,5 @@
 @import './assets/styles/scss/_fonts.scss';
+@import './assets/styles/scss/_colors.scss';
 
 body {
   margin: 0;
@@ -12,7 +13,87 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-// code {
-//   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-//     monospace;
-// }
+.react-datepicker {
+  border-color: $color-slate-900;
+  box-shadow: 1px 1px 1px $color-slate-900;
+
+  &__header {
+
+    background-color: $color-slate-100;
+    
+    .react-datepicker__current-month {
+      color: $color-slate-900;
+    }
+
+    .react-datepicker__day-names {
+    
+      .react-datepicker__day-name {
+        color: $color-slate-900;
+
+      }
+    }
+  }
+
+  &__month {
+
+    .react-datepicker__week {
+    
+      .react-datepicker__day {
+        color: $color-slate-100;
+
+        &.react-datepicker__day--selected {
+          background-color: $color-amber-400;
+          color: $color-slate-900;
+        }
+      }
+    }
+
+    &-container {
+      background-color: $color-slate-900;
+      color: $color-slate-100;
+    }
+
+  }
+
+  &__navigation {
+
+    &-icon {
+
+      &::before {
+        border-color: $color-slate-900;
+        top: 50%;
+      }
+
+      &.react-datepicker__navigation-icon--next {
+       
+        &::before {
+          transform: translateY(-50%) rotate(45deg);
+        }
+      }
+
+      &.react-datepicker__navigation-icon--previous {
+       
+        &::before {
+          transform: translateY(-50%) rotate(225deg);
+        }
+      }
+    }
+    
+    // .react-datepicker__navigation--previous,
+    // .react-datepicker__navigation--next {
+      
+    //   span {
+    //     &::before {
+          
+    //     }
+    //   }
+    // }
+  }
+
+  &__triangle {
+    &::before,
+    &::after {
+      content: none !important;
+    }
+  }
+}

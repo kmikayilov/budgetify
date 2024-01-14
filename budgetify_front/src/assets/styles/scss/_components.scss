@@ -3,6 +3,7 @@
 .custom-btn {
     display: flex;
     align-items: center;
+    // justify-content: center;
 
     border-radius: 12px;
     border: 1px solid $color-slate-900;
@@ -131,53 +132,6 @@
     text-align: center;
     font-size: 64px;
     line-height: 64px;
-
-    // @media (max-width: 650px) {
-			// width: 400px;
-
-        // .custom {
-        //     &-col {
-        //         svg {
-        //             width: 40px;
-        //         }
-        //     }
-
-        //     &-row {
-        //         h4 {
-        //             font-size: 25px;
-        //         }
-
-        //         h6 {
-        //             font-size: 15px;
-        //         }
-        //     }
-        // }
-	// }
-
-	// @media (max-width: 450px) {
-	// 	// .auth-modal {
-	// 		width: 300px;
-
-	// 		.title-wrapper {
-	// 			.custom {
-	// 				&-col {
-	// 					svg {
-	// 						width: 30px;
-	// 					}
-	// 				}
-
-	// 				&-row {
-	// 					h4 {
-	// 						font-size: 20px;
-	// 					}
-
-	// 					h6 {
-	// 						font-size: 12px;
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-	// }
 }
 
 .input-wrapper {

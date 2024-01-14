@@ -6,13 +6,15 @@ interface State {
     pagination: IPagination | null;
     sort: ISort | null;
     fetchType: string;
+    transactionId: string;
 }
 
 const initialState: State = {
 	filters: null,
     pagination: null,
     sort: null,
-    fetchType: '', // add | edit | delete
+    fetchType: '', // delete
+    transactionId: '0'
 };
 
 const transactionSlice = createSlice({
@@ -43,8 +45,14 @@ const transactionSlice = createSlice({
         clearFetchType: (state) => {
             state.fetchType = ''
         },
+        setTransactionId: (state, action: PayloadAction<string>) => {
+            state.transactionId = action.payload
+        },
+        clearTransactionId: (state) => {
+            state.transactionId = '0'
+        }
 	}
 });
 
-export const { setFilters, clearFilters, setPagination, clearPagination, setSort, clearSort, setFetchType, clearFetchType } = transactionSlice.actions;
+export const { setFilters, clearFilters, setPagination, clearPagination, setSort, clearSort, setFetchType, clearFetchType, setTransactionId, clearTransactionId } = transactionSlice.actions;
 export default transactionSlice.reducer;

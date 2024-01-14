@@ -1,1 +1,93 @@
+@import '../../assets//styles/scss/colors.scss';
 
+
+.dashboard {
+	&-main {
+		svg {
+			width: 80px;
+			height: 80px;
+			margin-bottom: 20px;
+			margin-top: 120px;
+
+            color: $color-amber-400;
+		}
+
+		h4 {
+			margin-bottom: 50px;
+            font-size: 64px;
+            line-height: 64px;
+            color: $color-slate-600;
+		}
+
+		h6 {
+			cursor: pointer;
+
+            padding: 8px 20px;
+            border-radius: 12px;
+
+            box-sizing: border-box;
+
+            font-size: 32px;
+            line-height: 32px;
+            color: $color-slate-600;
+
+			&:hover {
+                border: 2px solid $color-slate-900;
+			}
+		}
+	}
+
+    @media (max-width: 900px) {
+		&-main {
+			svg {
+				width: 50px;
+			}
+
+			h4 {
+				font-size: 40px;
+                line-height: 40px;  
+			}
+
+			h6 {
+				font-size: 24px;
+                line-height: 24px;
+			}
+		}
+	}
+
+	@media (max-width: 600px) {
+		&-main {
+			svg {
+				width: 50px;
+			}
+
+			h4 {
+				font-size: 25px;
+                line-height: 25px;
+			}
+
+			h6 {
+				font-size: 18px;
+                line-height: 18px;
+			}
+		}
+	}
+
+	@media (max-width: 400px) {
+		&-main {
+			svg {
+				width: 50px;
+			}
+
+			h4 {
+				font-size: 20px;
+                line-height: 20px;
+			}
+
+			h6 {
+				font-size: 14px;
+                line-height: 14px;
+			}
+		}
+	}
+}

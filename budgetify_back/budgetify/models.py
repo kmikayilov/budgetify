@@ -33,6 +33,8 @@ class MyUserManager(UserManager):
 
 class User(AbstractUser):
     email = models.EmailField(unique=True, max_length=120, verbose_name='E-mail')
+    
+    username = None
 
     timestamp = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
@@ -43,6 +45,10 @@ class User(AbstractUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+    
+    @property
+    def username(self):
+        return self.email.split('@')[0]
 
 class Accounting(models.Model):
     name = models.CharField(max_length=50, null=True)

@@ -1,36 +1,46 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 import Dashboard from './components/Dashboard';
-import SignIn from './components/SignIn/SignIn';
-import SignUp from './components/SignUp/SignUp';
+import Auth from './components/Auth';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import TransactionList from './components/TransactionList';
 import TransactionDetail from './components/TransactionDetail';
-// import { fetchLoggedUser, logout } from './helpers/state/authSlice';
-// import { loaded } from './helpers/state/commonSlice';
+import { useAuthQuery } from './helpers/state/authApi';
+import { setToken } from './helpers/state/api';
 
-// import api from './helpers/api';
 
+import { auth } from './helpers/state/authSlice'
+
+import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
 
 function App() {
-  // const dispatch = useDispatch();
+  	const dispatch = useDispatch()
+
+	const [ hasToken, setHasToken ] = useState<boolean>(false)
+	const { data } = useAuthQuery(undefined, { skip: !hasToken })
 
 	useEffect(() => {
 		const token = window.localStorage.getItem('app-jwt-token');
-		
+
 		if (!!token) {
-			// api.setToken(token);
-			// dispatch(fetchLoggedUser());
+			setToken(token)
+			setHasToken(true)
+
+			if (!!data) {
+				dispatch(auth(data))
+			} else {
+				if ( window.location.pathname !== '/') {
+					window.location.pathname = '/'
+				}
+			}
+
 		}
-		
-		// api.setLogoutFn(() => dispatch(logout()));
-		// dispatch(loaded());
-	
-	}, []);
+	}, [data, dispatch]);
   
   return (
     <Router>
@@ -41,12 +51,24 @@ function App() {
 					<Route path="/transactions" Component={TransactionList} />
 					<Route path="/transactions/:id" Component={TransactionDetail} />
 					<Route path="/transactions/new" Component={TransactionDetail} />
-					<Route path="/sign-up" Component={SignUp} />
-					<Route path="/sign-in" Component={SignIn} />
+					<Route path="/sign-up" Component={Auth} />
+					<Route path="/sign-in" Component={Auth} />
 					<Route path="/" Component={Dashboard} />
 				</Routes>
 			</div>
 			<Footer />
+			<ToastContainer
+				position="top-right"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="dark"
+			/>
 		</div>
 	</Router>
   );
