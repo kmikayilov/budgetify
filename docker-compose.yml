@@ -1,0 +1,59 @@
+version: "3.7"
+services:
+  backend:
+    # networks:
+    #   - budgetify-net
+    build: ./budgetify_back
+    command: python manage.py runserver 0.0.0.0:80
+    volumes:
+      - static:/static
+    ports:
+      - 8000:8000
+    env_file:
+      - ./budgetify_back/.env
+    depends_on:
+      - db
+  frontend:
+    # networks:
+    #   - budgetify-net
+    build: ./budgetify_front
+    command: npm start
+    volumes:
+      - frontend:/app/build
+    ports:
+      - 3000:3000
+    env_file:
+      - ./budgetify_front/.env
+    depends_on:
+      - db
+  db:
+    # networks:
+    #   - budgetify-net
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=budgetify
+      - POSTGRES_PASSWORD=C4brePanl8hiwrO
+      - POSTGRES_DB=budgetify
+    ports:
+      - 5432:5432
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - static:/static
+      - frontend:/var/www/frontend
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+      - frontend
+
+volumes:
+  postgres_data:
+  static:
+  frontend:
+
+networks: 
+  budgetify-net:
