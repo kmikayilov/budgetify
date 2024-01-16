@@ -1,8 +1,6 @@
 version: "3.7"
 services:
   backend:
-    # networks:
-    #   - budgetify-net
     build: ./budgetify_back
     command: python manage.py runserver 0.0.0.0:80
     volumes:
@@ -14,8 +12,6 @@ services:
     depends_on:
       - db
   frontend:
-    # networks:
-    #   - budgetify-net
     build: ./budgetify_front
     command: npm start
     volumes:
@@ -27,8 +23,6 @@ services:
     depends_on:
       - db
   db:
-    # networks:
-    #   - budgetify-net
     image: postgres:latest
     volumes:
       - postgres_data:/var/lib/postgresql/data/
@@ -54,6 +48,3 @@ volumes:
   postgres_data:
   static:
   frontend:
-
-networks: 
-  budgetify-net:
