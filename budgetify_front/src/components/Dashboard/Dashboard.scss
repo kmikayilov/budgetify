@@ -2,7 +2,12 @@
 
 
 .dashboard {
+	
+	width: 90%;
+
 	&-main {
+		width: 100%;
+
 		svg {
 			width: 80px;
 			height: 80px;
@@ -35,7 +40,74 @@
                 border: 2px solid $color-slate-900;
 			}
 		}
+
 	}
+
+	&-stats {
+
+		display: flex;
+		flex-direction: row !important;
+		flex-wrap: wrap;
+		justify-content: space-around;
+		align-items: center;
+
+		width: 100%;
+
+		margin-top: 50px;
+		
+		& .card {
+			width: 600px;
+			height: 350px;
+			padding: 16px;
+			background-color: $color-slate-900;
+			border-radius: 12px;
+			margin: 0 20px 20px 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+	
+			svg {
+				margin: 0;
+			}
+	
+			.recharts-responsive-container {
+				.recharts-wrapper {
+					.recharts-legend-wrapper {
+						padding: 5px 15px;
+						right: 0px;
+						left: unset !important;
+						bottom: 0 !important;
+						line-height: 30px;
+						border-radius: 10px;
+						width: 210px !important;
+					}
+
+					.recharts-active-shape {
+						text {
+							font-size: 12px;
+						}
+					}
+				}
+			}
+	
+			.apexcharts-legend-series {
+				display: flex;
+				align-items: center;
+				margin-bottom: 10px !important;
+			
+				.apexcharts-legend-marker {
+					margin-right: 5px !important;
+				}
+			
+				.apexcharts-legend-text {
+					height: fit-content;
+					color: $color-slate-200;
+				}
+			}
+			
+		}
+	}
+	
 
     @media (max-width: 900px) {
 		&-main {

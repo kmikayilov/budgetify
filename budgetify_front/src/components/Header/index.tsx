@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FC, useCallback } from 'react';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 
@@ -16,6 +16,8 @@ const Header: FC= () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
+	const { pathname } = useLocation()
+
 	const logoutHandler = useCallback(() => {
 		dispatch(logout())
 		navigate('/')
@@ -32,11 +34,11 @@ const Header: FC= () => {
 				{
 					!!user && (
 						<>
-							<div className="header__navbar__item custom-btn" onClick={ () => navigate('/') }>
+							<div className={["header__navbar__item custom-btn", pathname === '/' ? 'active' : '' ].join(' ')} onClick={ () => navigate('/') }>
 								<div className="header__navbar__item__icon icon"><FontAwesomeIcon icon={faHouse} /></div>
 								<div className="header__navbar__item__title title">Dashboard</div>
 							</div>
-							<div className="header__navbar__item custom-btn" onClick={ () => navigate('/transactions') }>
+							<div className={["header__navbar__item custom-btn", pathname === '/transactions' ? 'active' : '' ].join(' ')} onClick={ () => navigate('/transactions') }>
 								<div className="header__navbar__item__icon icon"><FontAwesomeIcon icon={faReceipt} /></div>
 								<div className="header__navbar__item__title title">Transactions</div>
 							</div>

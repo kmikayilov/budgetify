@@ -73,6 +73,19 @@
 				}
 			}
 
+			&.active {
+
+				.icon {
+					svg {
+						color: $color-amber-400;
+					}
+				}
+
+				.title {
+					color: $color-amber-400;
+				}
+			}
+
 			@media (max-width: 430px) {
 				display: none;
 			}
